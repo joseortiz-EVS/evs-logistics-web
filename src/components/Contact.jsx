@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaWarehouse, FaFacebookF, FaInstagram, FaLinkedinIn, FaPaperPlane } from 'react-icons/fa'
 import useIsMobile from '../hooks/useIsMobile'
@@ -48,7 +49,6 @@ const Contact = () => {
       if (res.ok) {
         setStatus('success')
         setForm({ nombre: '', empresa: '', email: '', telefono: '', servicio: '', mensaje: '' })
-        setTimeout(() => setStatus('idle'), 6000)
       } else {
         setStatus('error')
       }
@@ -75,6 +75,39 @@ const Contact = () => {
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '30px' : '50px', alignItems: 'start' }}>
           {/* Formulario */}
           <ScrollReveal>
+            {status === 'success' ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, ease: 'easeOut' }}
+              style={{
+                padding: isMobile ? '40px 24px' : '60px 40px', borderRadius: '20px',
+                background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(43,108,176,0.4)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.2)', textAlign: 'center'
+              }}>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
+                style={{
+                  width: '72px', height: '72px', borderRadius: '50%', margin: '0 auto 24px',
+                  background: 'linear-gradient(135deg, #2b6cb0, #1a365d)', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                  fontSize: '38px', color: '#fff', fontWeight: 700,
+                  boxShadow: '0 8px 24px rgba(43,108,176,0.5)'
+                }}>✓</motion.div>
+              <motion.h3
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1, duration: 0.6 }}
+                style={{ fontSize: '24px', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>
+                ¡Gracias!
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4, duration: 0.6 }}
+                style={{ fontSize: '16px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, maxWidth: '360px', margin: '0 auto' }}>
+                Un ejecutivo se comunicará contigo a la brevedad.
+              </motion.p>
+            </motion.div>
+            ) : (
             <form onSubmit={handleSubmit} style={{
               padding: isMobile ? '20px' : '36px', borderRadius: '20px',
               background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
@@ -167,6 +200,7 @@ const Contact = () => {
                 )}
               </button>
             </form>
+            )}
           </ScrollReveal>
 
           {/* Info de contacto */}

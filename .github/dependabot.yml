@@ -1,0 +1,24 @@
+# Dependabot mantiene las dependencias actualizadas y avisa de vulnerabilidades.
+# Docs: https://docs.github.com/code-security/dependabot
+version: 2
+updates:
+  # Dependencias de la app (npm)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "deps"
+
+  # Acciones usadas en el workflow de despliegue (GitHub Actions)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "ci"
+    commit-message:
+      prefix: "ci"

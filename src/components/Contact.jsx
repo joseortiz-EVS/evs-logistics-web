@@ -25,17 +25,36 @@ const labelStyle = {
   marginBottom: '6px'
 }
 
+// Endpoint del formulario (Formspree). Reemplaza TU_FORM_ID por el id real de tu
+// formulario de Formspree apuntando a Fernanda.Rios@evslogist.com.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkoloaaz'
+
 const Contact = () => {
   const isMobile = useIsMobile()
   const [form, setForm] = useState({ nombre: '', empresa: '', email: '', telefono: '', servicio: '', mensaje: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
+    setStatus('sending')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...form, _subject: `Nueva cotización de ${form.nombre || 'sitio web'}` })
+      })
+      if (res.ok) {
+        setStatus('success')
+        setForm({ nombre: '', empresa: '', email: '', telefono: '', servicio: '', mensaje: '' })
+        setTimeout(() => setStatus('idle'), 6000)
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -126,18 +145,23 @@ const Contact = () => {
                   onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.15)'; e.target.style.boxShadow = 'none' }} />
               </div>
 
-              <button type="submit" style={{
+              <button type="submit" disabled={status === 'sending'} style={{
                 width: '100%', padding: '16px', borderRadius: '12px',
-                background: submitted ? '#48bb78' : '#3182ce',
+                background: status === 'success' ? '#48bb78' : status === 'error' ? '#e53e3e' : '#3182ce',
                 color: '#fff', border: 'none', fontSize: '16px', fontWeight: 600,
-                cursor: 'pointer', transition: 'all 0.3s',
+                cursor: status === 'sending' ? 'wait' : 'pointer', transition: 'all 0.3s',
+                opacity: status === 'sending' ? 0.8 : 1,
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                 boxShadow: '0 4px 16px rgba(49,130,206,0.3)'
               }}
-                onMouseEnter={e => { if (!submitted) e.currentTarget.style.background = '#2b6cb0' }}
-                onMouseLeave={e => { if (!submitted) e.currentTarget.style.background = '#3182ce' }}>
-                {submitted ? (
+                onMouseEnter={e => { if (status === 'idle') e.currentTarget.style.background = '#2b6cb0' }}
+                onMouseLeave={e => { if (status === 'idle') e.currentTarget.style.background = '#3182ce' }}>
+                {status === 'sending' ? (
+                  <>Enviando...</>
+                ) : status === 'success' ? (
                   <>✓ Enviado correctamente</>
+                ) : status === 'error' ? (
+                  <>✕ Error al enviar, intenta de nuevo</>
                 ) : (
                   <><FaPaperPlane style={{ fontSize: '14px' }} /> Solicitar Cotización</>
                 )}

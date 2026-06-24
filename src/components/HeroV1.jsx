@@ -56,7 +56,7 @@ const CountUp = ({ end }) => {
   )
 }
 
-const HeroV1 = () => {
+const HeroV1 = ({ onNavigate }) => {
   const isMobile = useIsMobile()
   return (
     <section style={{
@@ -109,7 +109,7 @@ const HeroV1 = () => {
           letterSpacing: '1px'
         }}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.2 }}>
-          Soluciones Logísticas Integrales
+          Conectamos tu Carga, Impulsamos tu Negocio
         </motion.p>
       </div>
 
@@ -126,21 +126,27 @@ const HeroV1 = () => {
         <Counter end={50} suffix="+" label="Clientes" icon={FaPlane} delay={2.4} />
       </motion.div>
 
-      {/* Scott Belsky quote */}
-      <motion.p
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 2.8 }}
+      {/* Call to action */}
+      <motion.button
+        onClick={() => onNavigate && onNavigate('contacto')}
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 2.8 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.97 }}
         style={{
-          position: 'relative', zIndex: 3, textAlign: 'center',
-          fontSize: 'clamp(14px, 1.8vw, 18px)', fontStyle: 'italic',
-          color: 'rgba(255,255,255,0.55)', maxWidth: '600px',
-          margin: '24px auto 40px', padding: '0 24px', lineHeight: 1.7
+          position: 'relative', zIndex: 3,
+          margin: '24px auto 40px', padding: '16px 48px',
+          fontSize: 'clamp(15px, 1.8vw, 18px)', fontWeight: 700,
+          letterSpacing: '3px', textTransform: 'uppercase',
+          color: '#fff', background: '#3182ce', border: 'none',
+          borderRadius: '12px', cursor: 'pointer',
+          boxShadow: '0 8px 24px rgba(49,130,206,0.4)',
+          transition: 'background 0.3s'
         }}
+        onMouseEnter={e => e.currentTarget.style.background = '#2b6cb0'}
+        onMouseLeave={e => e.currentTarget.style.background = '#3182ce'}
       >
-        "No es sobre las ideas, sino sobre hacer que estas se vuelvan realidad"
-        <span style={{ display: 'block', marginTop: '8px', fontStyle: 'normal', fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>
-          — Scott Belsky
-        </span>
-      </motion.p>
+        Solicitar Cotización
+      </motion.button>
     </section>
   )
 }

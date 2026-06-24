@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Nosotros', page: 'nosotros' },
   { label: 'Servicios', page: 'servicios' },
   { label: 'Galería', page: 'galeria' },
-  { label: 'Contacto', page: 'contacto' }
+  { label: 'Solicitar Cotización', page: 'contacto', cta: true }
 ]
 
 const socialLinks = [
@@ -45,18 +45,32 @@ const NavbarV1 = ({ currentPage, onNavigate }) => {
           </button>
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }} className="nav-desktop">
             {navLinks.map(link => (
-              <button key={link.page} onClick={() => handleNav(link.page)}
-                style={{
-                  color: currentPage === link.page ? '#63b3ed' : 'rgba(255,255,255,0.7)',
-                  textDecoration: 'none', fontSize: '14px', fontWeight: currentPage === link.page ? 600 : 500,
-                  cursor: 'pointer', padding: '6px 0', background: 'none', border: 'none',
-                  borderBottom: `2px solid ${currentPage === link.page ? '#63b3ed' : 'transparent'}`,
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={e => { if (currentPage !== link.page) e.target.style.color = '#63b3ed' }}
-                onMouseLeave={e => { if (currentPage !== link.page) e.target.style.color = 'rgba(255,255,255,0.7)' }}>
-                {link.label}
-              </button>
+              link.cta ? (
+                <button key={link.page} onClick={() => handleNav(link.page)}
+                  style={{
+                    color: '#fff', fontSize: '14px', fontWeight: 700, letterSpacing: '1px',
+                    textTransform: 'uppercase', cursor: 'pointer', padding: '9px 22px',
+                    background: '#3182ce', border: 'none', borderRadius: '8px',
+                    boxShadow: '0 4px 14px rgba(49,130,206,0.45)', transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#2b6cb0'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#3182ce'; e.currentTarget.style.transform = 'translateY(0)' }}>
+                  {link.label}
+                </button>
+              ) : (
+                <button key={link.page} onClick={() => handleNav(link.page)}
+                  style={{
+                    color: currentPage === link.page ? '#63b3ed' : 'rgba(255,255,255,0.7)',
+                    textDecoration: 'none', fontSize: '14px', fontWeight: currentPage === link.page ? 600 : 500,
+                    cursor: 'pointer', padding: '6px 0', background: 'none', border: 'none',
+                    borderBottom: `2px solid ${currentPage === link.page ? '#63b3ed' : 'transparent'}`,
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={e => { if (currentPage !== link.page) e.target.style.color = '#63b3ed' }}
+                  onMouseLeave={e => { if (currentPage !== link.page) e.target.style.color = 'rgba(255,255,255,0.7)' }}>
+                  {link.label}
+                </button>
+              )
             ))}
             <div style={{ display: 'flex', gap: '8px', marginLeft: '16px' }}>
               {socialLinks.map(social => (
@@ -95,7 +109,13 @@ const NavbarV1 = ({ currentPage, onNavigate }) => {
             </button>
             {navLinks.map((link, i) => (
               <motion.button key={link.page}
-                style={{ color: currentPage === link.page ? '#63b3ed' : '#fff', textDecoration: 'none', fontSize: '22px', fontWeight: currentPage === link.page ? 700 : 600, cursor: 'pointer', background: 'none', border: 'none' }}
+                style={link.cta ? {
+                  color: '#fff', fontSize: '20px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
+                  cursor: 'pointer', background: '#3182ce', border: 'none', borderRadius: '10px',
+                  padding: '14px 40px', marginTop: '8px', boxShadow: '0 6px 18px rgba(49,130,206,0.45)'
+                } : {
+                  color: currentPage === link.page ? '#63b3ed' : '#fff', textDecoration: 'none', fontSize: '22px', fontWeight: currentPage === link.page ? 700 : 600, cursor: 'pointer', background: 'none', border: 'none'
+                }}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                 onClick={() => handleNav(link.page)}>
                 {link.label}

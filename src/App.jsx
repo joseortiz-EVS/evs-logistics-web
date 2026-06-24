@@ -48,7 +48,7 @@ const App = () => {
       </svg>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <NavbarV1 currentPage={currentPage} onNavigate={handleNavigate} />
-        <PageComponent />
+        <PageComponent onNavigate={handleNavigate} />
         {pagesWithMarquee.includes(currentPage) && <Marquee />}
         <FooterV1 onNavigate={handleNavigate} />
       </div>

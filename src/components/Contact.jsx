@@ -139,7 +139,7 @@ const Contact = () => {
                 {submitted ? (
                   <>✓ Enviado correctamente</>
                 ) : (
-                  <><FaPaperPlane style={{ fontSize: '14px' }} /> Enviar Cotización</>
+                  <><FaPaperPlane style={{ fontSize: '14px' }} /> Solicitar Cotización</>
                 )}
               </button>
             </form>
@@ -153,8 +153,8 @@ const Contact = () => {
               </h3>
 
               {[
-                { icon: FaEnvelope, label: 'Email', value: 'contacto@evslogist.com', href: 'mailto:contacto@evslogist.com' },
-                { icon: FaPhone, label: 'Teléfono', value: '+52 (55) XXXX-XXXX', href: 'tel:+5255XXXXXXXX' },
+                { icon: FaEnvelope, label: 'Email', value: 'Fernanda.Rios@evslogist.com', href: 'mailto:Fernanda.Rios@evslogist.com' },
+                { icon: FaPhone, label: 'Teléfono fijo', value: '+52 (55) 5576-4581', href: 'tel:+525555764581' },
                 { icon: FaWhatsapp, label: 'WhatsApp', value: 'Mensaje directo', href: '#' }
               ].map((item, i) => (
                 <a key={i} href={item.href} style={{ textDecoration: 'none' }}>

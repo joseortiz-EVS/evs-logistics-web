@@ -13,7 +13,7 @@ const navLinks = [
 
 const socialLinks = [
   { icon: FaFacebookF, href: 'https://www.facebook.com/profile.php?id=100080143248684', label: 'Facebook' },
-  { icon: FaInstagram, href: 'https://www.instagram.com/evs.logistics', label: 'Instagram' },
+  { icon: FaInstagram, href: 'https://www.instagram.com/evslogistic', label: 'Instagram' },
   { icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/evs-logistic/', label: 'LinkedIn' },
   { icon: FaWhatsapp, href: '#', label: 'WhatsApp' }
 ]

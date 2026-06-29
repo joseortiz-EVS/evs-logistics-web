@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="triGrad" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2b6cb0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a90d9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="triGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2b6cb0;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main triangle (mountain/arrow up) -->
+  <polygon points="250,65 355,235 145,235" fill="url(#triGrad)" opacity="0.95"/>
+
+  <!-- Second triangle layer (depth effect) -->
+  <polygon points="250,100 320,220 180,220" fill="url(#triGrad2)" opacity="0.5"/>
+
+  <!-- Third small triangle (peak highlight) -->
+  <polygon points="250,65 275,115 225,115" fill="#63b3ed" opacity="0.8"/>
+
+  <!-- Horizontal lines through triangle (representing routes/paths) -->
+  <line x1="185" y1="180" x2="315" y2="180" stroke="white" stroke-width="2" opacity="0.4"/>
+  <line x1="205" y1="155" x2="295" y2="155" stroke="white" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Small arrow emerging from peak -->
+  <line x1="250" y1="65" x2="250" y2="42" stroke="#4a90d9" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="242,47 250,32 258,47" fill="#4a90d9"/>
+
+  <!-- Company name -->
+  <text x="250" y="295" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="900" fill="#1a365d" letter-spacing="6">EVS</text>
+
+  <!-- LOGISTICS text -->
+  <text x="250" y="340" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="300" fill="#2b6cb0" letter-spacing="16">LOGISTICS</text>
+
+  <!-- Decorative line -->
+  <rect x="175" y="355" width="150" height="2" rx="1" fill="#4a90d9" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="250" y="385" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#4a6785" letter-spacing="6">INTELLIGENT SOLUTIONS</text>
+</svg>

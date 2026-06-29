@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b6cb0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="letterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Hexagonal badge -->
+  <polygon points="250,55 345,110 345,220 250,275 155,220 155,110" fill="url(#hexGrad)" rx="10"/>
+
+  <!-- Inner hexagon outline -->
+  <polygon points="250,75 330,120 330,210 250,255 170,210 170,120" fill="none" stroke="white" stroke-width="1" opacity="0.2"/>
+
+  <!-- EVS Letters stylized -->
+  <!-- E -->
+  <text x="185" y="195" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="900" fill="white" opacity="0.95">E</text>
+  <!-- V -->
+  <text x="228" y="195" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="900" fill="#63b3ed">V</text>
+  <!-- S -->
+  <text x="278" y="195" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="900" fill="white" opacity="0.95">S</text>
+
+  <!-- Small connecting dots -->
+  <circle cx="225" cy="130" r="3" fill="#63b3ed" opacity="0.8"/>
+  <circle cx="275" cy="130" r="3" fill="#63b3ed" opacity="0.8"/>
+  <line x1="225" y1="130" x2="275" y2="130" stroke="#63b3ed" stroke-width="1" opacity="0.5"/>
+
+  <!-- LOGISTICS -->
+  <text x="250" y="325" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="800" fill="#1a365d" letter-spacing="10">LOGISTICS</text>
+
+  <!-- Divider -->
+  <line x1="140" y1="345" x2="360" y2="345" stroke="#4a90d9" stroke-width="1" opacity="0.4"/>
+
+  <!-- Tagline -->
+  <text x="250" y="375" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#4a6785" letter-spacing="5">INTELLIGENT SOLUTIONS</text>
+
+  <!-- Small accent lines -->
+  <line x1="140" y1="290" x2="170" y2="290" stroke="#4a90d9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="330" y1="290" x2="360" y2="290" stroke="#4a90d9" stroke-width="3" stroke-linecap="round"/>
+</svg>

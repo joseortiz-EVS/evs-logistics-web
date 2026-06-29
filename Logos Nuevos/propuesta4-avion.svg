@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90d9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#63b3ed;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#4a90d9;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular frame -->
+  <circle cx="250" cy="175" r="105" fill="none" stroke="#1a365d" stroke-width="3"/>
+  <circle cx="250" cy="175" r="100" fill="none" stroke="#1a365d" stroke-width="1" opacity="0.3"/>
+
+  <!-- Globe lines inside circle -->
+  <ellipse cx="250" cy="175" rx="50" ry="100" fill="none" stroke="#1a365d" stroke-width="1.5" opacity="0.25"/>
+  <line x1="150" y1="175" x2="350" y2="175" stroke="#1a365d" stroke-width="1.5" opacity="0.25"/>
+  <ellipse cx="250" cy="140" rx="92" ry="12" fill="none" stroke="#1a365d" stroke-width="1" opacity="0.2"/>
+  <ellipse cx="250" cy="210" rx="92" ry="12" fill="none" stroke="#1a365d" stroke-width="1" opacity="0.2"/>
+
+  <!-- Flight path arc -->
+  <path d="M 170 230 Q 200 120, 310 130" fill="none" stroke="url(#pathGrad)" stroke-width="2.5" stroke-dasharray="6,4"/>
+
+  <!-- Airplane icon -->
+  <g transform="translate(310, 125) rotate(-30)">
+    <!-- Fuselage -->
+    <path d="M 0,0 L 30,-5 L 35,0 L 30,5 Z" fill="#1a365d"/>
+    <!-- Wing -->
+    <path d="M 10,-2 L 18,-18 L 22,-17 L 16,0 Z" fill="#4a90d9"/>
+    <path d="M 10,2 L 18,18 L 22,17 L 16,0 Z" fill="#4a90d9"/>
+    <!-- Tail -->
+    <path d="M 0,-1 L -5,-10 L -2,-10 L 3,0 Z" fill="#2b6cb0"/>
+    <path d="M 0,1 L -5,10 L -2,10 L 3,0 Z" fill="#2b6cb0"/>
+  </g>
+
+  <!-- Trail dots -->
+  <circle cx="175" cy="225" r="3" fill="#4a90d9" opacity="0.4"/>
+  <circle cx="190" cy="210" r="2.5" fill="#4a90d9" opacity="0.5"/>
+  <circle cx="210" cy="195" r="2" fill="#4a90d9" opacity="0.6"/>
+
+  <!-- Company Name -->
+  <text x="250" y="330" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="900" fill="#1a365d" letter-spacing="4">EVS</text>
+
+  <!-- LOGISTICS with light weight -->
+  <text x="250" y="368" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="300" fill="#2b6cb0" letter-spacing="14">LOGISTICS</text>
+
+  <!-- Decorative dots -->
+  <circle cx="155" cy="350" r="2.5" fill="#4a90d9" opacity="0.5"/>
+  <circle cx="345" cy="350" r="2.5" fill="#4a90d9" opacity="0.5"/>
+
+  <!-- Bottom line -->
+  <line x1="165" y1="385" x2="335" y2="385" stroke="#1a365d" stroke-width="1" opacity="0.25"/>
+
+  <!-- Tagline -->
+  <text x="250" y="410" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" fill="#4a6785" letter-spacing="6">INTELLIGENT SOLUTIONS</text>
+</svg>

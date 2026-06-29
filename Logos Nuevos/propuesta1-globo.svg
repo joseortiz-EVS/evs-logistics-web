@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2b6cb0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a90d9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#63b3ed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Globe -->
+  <circle cx="250" cy="185" r="95" fill="none" stroke="url(#grad1)" stroke-width="5"/>
+  <!-- Globe meridians -->
+  <ellipse cx="250" cy="185" rx="45" ry="95" fill="none" stroke="#1a365d" stroke-width="2.5" opacity="0.6"/>
+  <ellipse cx="250" cy="185" rx="75" ry="95" fill="none" stroke="#1a365d" stroke-width="2" opacity="0.4"/>
+  <!-- Globe parallels -->
+  <line x1="155" y1="185" x2="345" y2="185" stroke="#1a365d" stroke-width="2.5" opacity="0.6"/>
+  <ellipse cx="250" cy="145" rx="88" ry="10" fill="none" stroke="#1a365d" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="250" cy="225" rx="88" ry="10" fill="none" stroke="#1a365d" stroke-width="2" opacity="0.4"/>
+
+  <!-- Arrow path curving around globe -->
+  <path d="M 160 220 Q 120 160, 180 120 Q 240 80, 310 110" fill="none" stroke="url(#grad2)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Arrow head -->
+  <polygon points="305,100 320,112 305,118" fill="#4a90d9"/>
+
+  <!-- Second arrow -->
+  <path d="M 340 150 Q 380 210, 320 250 Q 260 290, 190 260" fill="none" stroke="url(#grad2)" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="195,270 180,258 195,252" fill="#4a90d9"/>
+
+  <!-- Company name -->
+  <text x="250" y="330" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="52" font-weight="800" fill="#1a365d" letter-spacing="8">EVS</text>
+
+  <!-- LOGISTICS -->
+  <text x="250" y="375" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="700" fill="#4a90d9" letter-spacing="12">LOGISTICS</text>
+
+  <!-- Divider line -->
+  <line x1="150" y1="390" x2="350" y2="390" stroke="#1a365d" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Tagline -->
+  <text x="250" y="415" text-anchor="middle" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#4a6785" letter-spacing="5">INTELLIGENT SOLUTIONS</text>
+</svg>

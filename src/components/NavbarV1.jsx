@@ -15,7 +15,7 @@ const socialLinks = [
   { icon: FaFacebookF, href: 'https://www.facebook.com/profile.php?id=100080143248684', label: 'Facebook' },
   { icon: FaInstagram, href: 'https://www.instagram.com/evslogistic', label: 'Instagram' },
   { icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/evs-logistic/', label: 'LinkedIn' },
-  { icon: FaWhatsapp, href: '#', label: 'WhatsApp' }
+  { icon: FaWhatsapp, href: 'https://wa.me/5215548268211?text=Hola,%20vengo%20de%20la%20página%20web%20de%20EVS%20Logistics%20y%20quiero%20cotizar%20un%20envío', label: 'WhatsApp' }
 ]
 
 const NavbarV1 = ({ currentPage, onNavigate }) => {

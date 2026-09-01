@@ -2,6 +2,11 @@
 // portal de clientes. Cada uno guarda su propia sesión por separado.
 const BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
 
+// Desde el 1-sep-2026 la API es la del ERP (mi-erp). El ERP es multiempresa:
+// este identificador dice de qué empresa es el portal. Sólo lo usan las rutas
+// públicas (login y rastreo); después del login, la sesión ya trae la empresa.
+export const PORTAL_SLUG = (import.meta.env.VITE_PORTAL_EMPRESA || 'evs').trim().toLowerCase()
+
 // Sin servidor configurado y trabajando en la computadora: datos de ejemplo.
 // En el sitio publicado esto siempre es falso.
 export const MODO_DEMO = !BASE && import.meta.env.DEV
@@ -28,12 +33,18 @@ export const solicitar = async (ruta, opciones = {}) => {
   // La comparación literal con import.meta.env.DEV deja los datos de ejemplo
   // fuera del sitio publicado: en producción esta rama se elimina al compilar.
   if (import.meta.env.DEV && MODO_DEMO) {
-    const modulo = ruta.startsWith('/api/portal')
+    // Los datos de ejemplo siguen hablando el idioma viejo (/api/portal/...,
+    // /api/rastreo/...): se traduce la ruta nueva del ERP a la vieja.
+    const rutaDemo = ruta
+      .replace(new RegExp(`^/api/portal-cliente/${PORTAL_SLUG}/rastreo/`), '/api/rastreo/')
+      .replace(new RegExp(`^/api/portal-cliente/${PORTAL_SLUG}/`), '/api/portal/')
+      .replace(/^\/api\/portal-cliente\//, '/api/portal/')
+    const modulo = rutaDemo.startsWith('/api/portal')
       ? await import('./demoPortal.js')
       : await import('./demo.js')
     const manejar = modulo.manejarDemoPortal || modulo.manejarDemo
     try {
-      return await manejar(ruta, resto)
+      return await manejar(rutaDemo, resto)
     } catch (err) {
       throw new ErrorApi(err.message, err.codigo || 400)
     }

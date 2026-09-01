@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   FaArrowLeft, FaMapMarkerAlt, FaRegCalendarAlt, FaBoxOpen, FaHistory, FaRoute,
-  FaClipboardList, FaBoxes, FaWeightHanging, FaCube, FaLayerGroup
+  FaClipboardList, FaBoxes, FaWeightHanging, FaCube, FaLayerGroup, FaFileAlt, FaFileInvoiceDollar
 } from 'react-icons/fa'
 import useIsMobile from '../hooks/useIsMobile'
 import { detalleEnvio } from '../lib/apiPortal'
 import { buscarServicio, formatearFecha, formatearFechaHora } from '../data/estatus'
 import { Etapas, LineaTiempo, Pastilla } from './Progreso'
 import RutaMapa from './RutaMapa'
-import { C, panel, btn } from './ui'
+import { C, panel, btn, TONO_FACTURA, dinero } from './ui'
 
 const Dato = ({ icono: Icono, etiqueta, valor }) => (
   <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
@@ -134,6 +134,71 @@ const DetalleEnvio = ({ envioId, onVolver }) => {
               estatus={datos.envio.estatus}
             />
           </div>
+
+          {/* Documentos del embarque que la empresa comparte con el cliente (packing list, factura comercial) */}
+          {datos.documentos?.length > 0 && (
+            <div style={{ ...panel, padding: isMobile ? '18px' : '22px', marginBottom: '16px' }}>
+              <h2 style={{
+                fontSize: '17px', fontWeight: 700, color: C.texto, marginBottom: '14px',
+                display: 'flex', alignItems: 'center', gap: '10px'
+              }}>
+                <FaFileAlt style={{ fontSize: '14px', color: C.azulClaro }} /> Documentos de tu carga
+              </h2>
+              <div style={{ display: 'grid', gap: '8px' }}>
+                {datos.documentos.map(doc => (
+                  <a key={doc.id} href={doc.url} target="_blank" rel="noopener noreferrer"
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+                      padding: '12px 14px', borderRadius: '10px', textDecoration: 'none',
+                      background: 'rgba(99,179,237,0.06)', border: `1px solid ${C.borde}`
+                    }}>
+                    <span style={{ fontSize: '14px', color: C.texto, fontWeight: 600 }}>{doc.tipo}</span>
+                    <span style={{ fontSize: '12px', color: C.suave, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {doc.numero || doc.nombre || 'Ver documento'}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* La factura del servicio y su saldo, para que el cliente sepa qué debe de este embarque */}
+          {datos.factura && (() => {
+            const tono = TONO_FACTURA[datos.factura.estatus] || TONO_FACTURA.pendiente
+            return (
+              <div style={{ ...panel, padding: isMobile ? '18px' : '22px', marginBottom: '16px' }}>
+                <h2 style={{
+                  fontSize: '17px', fontWeight: 700, color: C.texto, marginBottom: '14px',
+                  display: 'flex', alignItems: 'center', gap: '10px'
+                }}>
+                  <FaFileInvoiceDollar style={{ fontSize: '14px', color: C.azulClaro }} /> Tu factura
+                </h2>
+                <div style={{
+                  display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '14px',
+                  alignItems: isMobile ? 'stretch' : 'center', justifyContent: 'space-between'
+                }}>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '5px' }}>
+                      <p style={{ fontSize: '15px', fontWeight: 700, color: C.texto }}>Factura {datos.factura.folio}</p>
+                      <span style={{
+                        padding: '4px 11px', borderRadius: '999px', fontSize: '11px', fontWeight: 700,
+                        background: tono.fondo, color: tono.color, border: `1px solid ${tono.borde}`
+                      }}>{tono.texto}</span>
+                    </div>
+                    <p style={{ fontSize: '13px', color: C.suave }}>{datos.factura.concepto}</p>
+                  </div>
+                  <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
+                    <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: C.tenue }}>
+                      {datos.factura.saldo > 0 ? 'Monto por pagar' : 'Total'}
+                    </p>
+                    <p style={{ fontSize: '22px', fontWeight: 800, color: C.texto }}>
+                      {dinero(datos.factura.saldo > 0 ? datos.factura.saldo : datos.factura.monto, datos.factura.moneda)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )
+          })()}
 
           {datos.eventos.length > 0 && (
             <div style={{ ...panel, padding: isMobile ? '22px 18px' : '30px' }}>

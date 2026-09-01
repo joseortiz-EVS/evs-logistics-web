@@ -1,5 +1,5 @@
 // Llamadas del panel interno (personal de EVS).
-import { solicitar, guardarToken as guardar, leerToken as leer, borrarToken as borrar, MODO_DEMO } from './http'
+import { solicitar, guardarToken as guardar, leerToken as leer, borrarToken as borrar, MODO_DEMO, PORTAL_SLUG } from './http'
 
 export { MODO_DEMO }
 
@@ -10,8 +10,9 @@ export const borrarToken = () => borrar('staff')
 const conSesion = (ruta, opciones = {}) => solicitar(ruta, { ...opciones, sesion: 'staff' })
 
 // --- Público ---
+// 1-sep-2026: el rastreo público lo contesta el ERP (mi-erp) por empresa.
 export const rastrear = (numero) =>
-  solicitar(`/api/rastreo/${encodeURIComponent(String(numero).trim())}`)
+  solicitar(`/api/portal-cliente/${PORTAL_SLUG}/rastreo/${encodeURIComponent(String(numero).trim())}`)
 
 // --- Sesión del panel ---
 export const iniciarSesion = (email, password) =>

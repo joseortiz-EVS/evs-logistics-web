@@ -55,6 +55,25 @@ const Login = ({ onEntrar }) => {
           </p>
         </div>
 
+        {/* 1-sep-2026: las guías, clientes y facturas ya se capturan en el ERP.
+            Este panel se conserva sólo como puerta; la operación vive allá. */}
+        <div style={{
+          background: 'rgba(214,158,46,0.12)', border: '1px solid rgba(214,158,46,0.4)',
+          borderRadius: '12px', padding: '14px 16px', marginBottom: '16px'
+        }}>
+          <p style={{ fontSize: '13px', color: '#f6e05e', fontWeight: 700, marginBottom: '4px' }}>
+            La captura ahora se hace en el ERP
+          </p>
+          <p style={{ fontSize: '12px', color: COLORES.textoTenue, lineHeight: 1.5 }}>
+            Guías, clientes, facturas y comprobantes se administran desde el módulo
+            "Portal de clientes" y "FFW" del ERP. Lo que captures allá lo ve el cliente
+            aquí al instante.{' '}
+            <a href={import.meta.env.VITE_ERP_URL || 'https://mi-erp-bice.vercel.app'} target="_blank" rel="noopener noreferrer" style={{ color: COLORES.azulClaro }}>
+              Abrir el ERP
+            </a>
+          </p>
+        </div>
+
         <div style={{
           display: 'flex', gap: '6px', background: COLORES.superficie, border: `1px solid ${COLORES.borde}`,
           borderRadius: '12px', padding: '5px', marginBottom: '16px'

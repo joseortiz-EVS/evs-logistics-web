@@ -1,0 +1,55 @@
+// Lo que Google lee de cada dirección: título, descripción, canonical, hreflang y Open Graph.
+// Los textos están aquí para poder revisarlos y cambiarlos sin tocar el resto del sitio.
+import { PAISES, ORDEN } from './paises'
+import { rutaDe } from './rutas'
+
+export const DOMINIO = 'https://www.evslogist.com'
+const IDIOMA = { mx: 'es-MX', co: 'es-CO', do: 'es-DO', ec: 'es-EC' }
+const MARCA = ' | EVS Logistics'
+
+const SERVICIOS = {
+  'forwarding':           p => ({ title: `Forwarding marítimo y aéreo China–${p.corto}${MARCA}`, desc: `Carga completa (FCL), consolidada (LCL) y aérea de China a ${p.nombre}, coordinada puerta a puerta con seguimiento y documentación completa.` }),
+  'gestion-aduanal':      p => ({ title: `Gestión aduanal en ${p.nombre}${MARCA}`, desc: `Despacho de importación y exportación en ${p.nombre}: clasificación arancelaria, permisos, cumplimiento normativo y auditoría aduanera.` }),
+  'agente-de-compras':    p => ({ title: `Agente de compras en China para ${p.nombre}${MARCA}`, desc: `Negociamos con proveedores en China en tu nombre: desarrollo de producto, marca propia, control de calidad y asesoría comercial para importadores de ${p.nombre}.` }),
+  'revision-en-origen':   p => ({ title: `Revisión en origen antes del embarque a ${p.nombre}${MARCA}`, desc: `Inspección de calidad, cantidad y empaque de tu mercancía en China antes de embarcar a ${p.nombre}, con reporte fotográfico en 48 horas.` }),
+  'transporte-terrestre': p => ({ title: `Transporte terrestre en ${p.nombre}${MARCA}`, desc: `Flete terrestre con rastreo GPS, seguro de carga y entregas programadas para tu mercancía en ${p.nombre}.` }),
+  '3pl':                  p => ({ title: `3PL: almacenaje y distribución en ${p.nombre}${MARCA}`, desc: `Almacenamiento, gestión de inventarios, preparación de pedidos, cross-docking y última milla en ${p.nombre}.` }),
+}
+
+export function metaDe(pais, page, servicio) {
+  const p = PAISES[pais]
+  switch (page) {
+    case 'nosotros': return { title: `Presencia global: México, China, Colombia, Rep. Dominicana y Ecuador${MARCA}`, desc: `Operamos en 5 países conectando Latinoamérica con Asia. En ${p.nombre} desde ${p.desde}.` }
+    case 'servicios':
+      if (servicio && SERVICIOS[servicio]) return SERVICIOS[servicio](p)
+      return { title: `Servicios logísticos en ${p.nombre}${MARCA}`, desc: `Forwarding marítimo y aéreo, gestión aduanal, agente de compras en China, revisión en origen, transporte terrestre y 3PL para importadores de ${p.nombre}.` }
+    case 'galeria': return { title: `Galería: nuestra operación${MARCA}`, desc: 'Bodegas, contenedores y embarques de EVS Logistics en China y Latinoamérica.' }
+    case 'contacto': return { title: `Contacto y cotización en ${p.nombre}${MARCA}`, desc: `Solicita una cotización para importar de China a ${p.nombre}. Respuesta el mismo día.` }
+    default: return { title: `EVS Logistics ${p.corto} | Logística integral China–${p.nombre}`, desc: `Forwarder con presencia en ${p.nombre} desde ${p.desde}. Flete marítimo y aéreo, gestión aduanal, agente de compras en China, transporte terrestre y 3PL.` }
+  }
+}
+
+function etiqueta(selector, crear) {
+  let el = document.head.querySelector(selector)
+  if (!el) { el = crear(); document.head.appendChild(el) }
+  return el
+}
+function meta(attr, nombre, contenido) {
+  etiqueta(`meta[${attr}="${nombre}"]`, () => { const m = document.createElement('meta'); m.setAttribute(attr, nombre); return m }).setAttribute('content', contenido)
+}
+
+export function aplicarMeta(pais, page, servicio) {
+  const { title, desc } = metaDe(pais, page, servicio)
+  const url = DOMINIO + rutaDe(pais, page, servicio)
+  document.title = title
+  document.documentElement.lang = IDIOMA[pais] || 'es'
+  meta('name', 'description', desc)
+  meta('property', 'og:title', title); meta('property', 'og:description', desc)
+  meta('property', 'og:url', url); meta('property', 'og:type', 'website'); meta('property', 'og:image', DOMINIO + '/fotos/hero-port.jpg')
+  etiqueta('link[rel="canonical"]', () => { const l = document.createElement('link'); l.rel = 'canonical'; return l }).href = url
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach(l => l.remove())
+  for (const k of ORDEN) {
+    const l = document.createElement('link'); l.rel = 'alternate'; l.hreflang = IDIOMA[k]; l.href = DOMINIO + rutaDe(k, page, servicio); document.head.appendChild(l)
+  }
+  const xd = document.createElement('link'); xd.rel = 'alternate'; xd.hreflang = 'x-default'; xd.href = DOMINIO + rutaDe('mx', page, servicio); document.head.appendChild(xd)
+}

@@ -7,7 +7,7 @@ import useIsMobile from '../hooks/useIsMobile'
 
 const services = [
   {
-    icon: FaShip, title: 'Forwarding', tag: 'Marítimo & Aéreo',
+    icon: FaShip, title: 'Forwarding', slug: 'forwarding', tag: 'Marítimo & Aéreo',
     description: 'Coordinación integral de envíos internacionales por vía marítima y aérea, con cobertura global.',
     image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&h=600&fit=crop&q=90',
     fullDescription: 'Servicio completo de forwarding internacional que conecta tus operaciones en cualquier parte del mundo. Gestionamos carga completa (FCL), consolidada (LCL) y envíos aéreos urgentes.',
@@ -15,7 +15,7 @@ const services = [
     stats: [{ value: '12+', label: 'Puertos' }, { value: '8+', label: 'Aeropuertos' }, { value: '5', label: 'Países' }]
   },
   {
-    icon: FaFileContract, title: 'Gestión Aduanal', tag: 'Despacho Aduanero',
+    icon: FaFileContract, title: 'Gestión Aduanal', slug: 'gestion-aduanal', tag: 'Despacho Aduanero',
     description: 'Manejo integral de trámites aduanales, clasificación arancelaria y cumplimiento normativo.',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop',
     fullDescription: 'Nuestro equipo de especialistas aduanales gestiona todos los procesos de importación y exportación, asegurando el cumplimiento normativo y la optimización de costos arancelarios.',
@@ -23,7 +23,7 @@ const services = [
     stats: [{ value: '100%', label: 'Cumplimiento' }, { value: '10+', label: 'Años exp.' }]
   },
   {
-    icon: FaShoppingCart, title: 'Agente de Compras', tag: 'Sourcing & Trading',
+    icon: FaShoppingCart, title: 'Agente de Compras', slug: 'agente-de-compras', tag: 'Sourcing & Trading',
     description: 'Negociamos los mejores términos comerciales, desarrollo de productos y gestión integral.',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop',
     fullDescription: 'Actuamos como tu representante de compras en origen, negociando directamente con proveedores para obtener los mejores precios, calidad y condiciones comerciales.',
@@ -31,7 +31,7 @@ const services = [
     stats: [{ value: '50+', label: 'Proveedores' }, { value: '15%', label: 'Ahorro prom.' }, { value: '100+', label: 'Productos' }]
   },
   {
-    icon: FaPlane, title: 'Revisión en Origen', tag: 'Quality Control',
+    icon: FaPlane, title: 'Revisión en Origen', slug: 'revision-en-origen', tag: 'Quality Control',
     description: 'Inspección y verificación de mercancía directamente en el punto de origen antes del embarque.',
     image: 'https://plus.unsplash.com/premium_photo-1675272834099-62a5d6dbf2f6?w=600&h=400&fit=crop',
     fullDescription: 'Realizamos inspecciones exhaustivas de tu mercancía en el punto de origen para garantizar que cumple con las especificaciones de calidad, cantidad y empaque antes del embarque.',
@@ -39,7 +39,7 @@ const services = [
     stats: [{ value: '99%', label: 'Precisión' }, { value: '48h', label: 'Reporte' }, { value: '0%', label: 'Rechazos' }]
   },
   {
-    icon: FaTruck, title: 'Transporte Terrestre', tag: 'Nacional e Internacional',
+    icon: FaTruck, title: 'Transporte Terrestre', slug: 'transporte-terrestre', tag: 'Nacional e Internacional',
     description: 'Soluciones de transporte terrestre con flota diversificada para todo tipo de carga.',
     image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&h=400&fit=crop',
     fullDescription: 'Contamos con una red de transporte terrestre que cubre las principales rutas nacionales e internacionales, con unidades de diferentes capacidades para adaptarnos a tus necesidades.',
@@ -47,7 +47,7 @@ const services = [
     stats: [{ value: '500+', label: 'Rutas' }, { value: '24/7', label: 'Monitoreo' }, { value: '98%', label: 'On-time' }]
   },
   {
-    icon: FaBoxes, title: '3PL', tag: 'Third Party Logistics',
+    icon: FaBoxes, title: '3PL', slug: '3pl', tag: 'Third Party Logistics',
     description: 'Soluciones integrales de logística tercerizada: almacenaje, distribución y fulfillment.',
     image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop',
     fullDescription: 'Ofrecemos servicios completos de tercerización logística que incluyen almacenamiento, gestión de inventarios, preparación de pedidos, distribución y última milla.',
@@ -237,11 +237,12 @@ const ServicePage = ({ service, onBack, isMobile }) => (
   </motion.div>
 )
 
-const ServicesV1 = () => {
+const ServicesV1 = ({ servicio, onServicio }) => {
   const isMobile = useIsMobile()
-  const [selectedService, setSelectedService] = useState(null)
+  const selectedService = servicio ? services.findIndex(s => s.slug === servicio) : -1
+  const setSelectedService = (i) => onServicio(i === null ? null : services[i].slug)
 
-  if (selectedService !== null) {
+  if (selectedService >= 0) {
     return (
       <AnimatePresence mode="wait">
         <ServicePage key={selectedService} service={services[selectedService]} onBack={() => setSelectedService(null)} isMobile={isMobile} />

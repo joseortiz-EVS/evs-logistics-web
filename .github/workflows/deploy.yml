@@ -20,11 +20,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
       - run: npm ci
-      - run: npm run build
+      # Chrome para el prerenderizado (no dependemos del que traiga la máquina)
+      - uses: browser-actions/setup-chrome@v1
+        id: chrome
+      # build:seo = vite build + prerenderizado de las 44 páginas (sitemap y robots incluidos).
+      # Si el prerenderizado fallara, el sitio se publica igual que antes (sin HTML pregenerado).
+      - run: npm run build:seo
         env:
+          CHROME: ${{ steps.chrome.outputs.chrome-path }}
           # Se configura en Settings > Secrets and variables > Actions > Variables.
           VITE_API_URL: ${{ vars.VITE_API_URL || 'https://api.evslogist.com' }}
       - uses: actions/upload-pages-artifact@v3

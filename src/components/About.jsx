@@ -365,8 +365,8 @@ const ClientLogos = ({ clients }) => {
               alt={clients[current].name}
               style={{
                 maxWidth: '180px', maxHeight: '80px', objectFit: 'contain',
-                // Unifica todos los logos de clientes a blanco.
-                filter: 'brightness(0) invert(1)', opacity: 0.9
+                // Unifica todos los logos de clientes a navy (antes eran blancos, para el fondo oscuro).
+                filter: 'brightness(0)', opacity: 0.82
               }}
             />
           </motion.div>

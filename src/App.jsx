@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NavbarV1 from './components/NavbarV1'
 import HeroV1 from './components/HeroV1'
 import About from './components/About'
@@ -8,6 +8,9 @@ import Contact from './components/Contact'
 import FooterV1 from './components/FooterV1'
 import Marquee from './components/Marquee'
 import { T } from './tema'
+import { PAIS, LLEGO_POR_UBICACION } from './paises'
+import { leerRuta, rutaDe } from './rutas'
+import { aplicarMeta } from './seo'
 
 const pages = {
   inicio: HeroV1,
@@ -20,12 +23,28 @@ const pages = {
 const pagesWithMarquee = ['inicio', 'nosotros', 'servicios', 'galeria', 'contacto']
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('inicio')
+  const inicial = leerRuta(window.location.pathname)
+  const [currentPage, setCurrentPage] = useState(inicial.page || 'inicio')
+  const [servicio, setServicio] = useState(inicial.servicio)
+  const [aviso, setAviso] = useState(LLEGO_POR_UBICACION)
 
-  const handleNavigate = (page) => {
+  // Misma navegación por pantallas; la dirección solo refleja dónde estás
+  const ir = (page, serv = null, empujar = true) => {
     setCurrentPage(page)
+    setServicio(serv)
+    if (empujar) window.history.pushState(null, '', rutaDe(PAIS.cod, page, serv))
     window.scrollTo(0, 0)
   }
+  const handleNavigate = (page) => ir(page)
+
+  useEffect(() => {
+    const alVolver = () => { const r = leerRuta(window.location.pathname); ir(r.page || 'inicio', r.servicio, false) }
+    window.addEventListener('popstate', alVolver)
+    return () => window.removeEventListener('popstate', alVolver)
+  }, [])
+
+  // Título, descripción y etiquetas para Google de la pantalla actual
+  useEffect(() => { aplicarMeta(PAIS.cod, currentPage, servicio) }, [currentPage, servicio])
 
   const PageComponent = pages[currentPage]
 
@@ -45,8 +64,16 @@ const App = () => {
         <path d="M0,450 Q350,250 720,300 T1440,450" fill="none" stroke={T.lineas} strokeWidth="0.6" opacity="0.7" />
       </svg>
       <div style={{ position: 'relative', zIndex: 1 }}>
+        <style>{'.sel-pais summary::-webkit-details-marker{display:none}'}</style>
         <NavbarV1 currentPage={currentPage} onNavigate={handleNavigate} />
-        <PageComponent onNavigate={handleNavigate} />
+        {aviso && (
+          <div style={{ position: 'fixed', left: 0, right: 0, top: 60, zIndex: 999, background: '#FFF4D6', color: '#5A3E00', fontSize: 14, padding: '10px 16px', textAlign: 'center', borderBottom: '1px solid #F3D48A' }}>
+            Te mostramos la versión de <b>{PAIS.nombre}</b> según tu ubicación. &nbsp;
+            <a href="#" onClick={e => { e.preventDefault(); setAviso(false); document.querySelector('.sel-pais')?.setAttribute('open', '') }} style={{ fontWeight: 700, textDecoration: 'underline', color: 'inherit' }}>Cambiar país</a>
+            &nbsp;·&nbsp; <a href="#" onClick={e => { e.preventDefault(); setAviso(false) }} style={{ opacity: .7, color: 'inherit' }}>Cerrar</a>
+          </div>
+        )}
+        <PageComponent onNavigate={handleNavigate} servicio={servicio} onServicio={(slug) => ir('servicios', slug)} />
         {pagesWithMarquee.includes(currentPage) && <Marquee />}
         <FooterV1 onNavigate={handleNavigate} />
       </div>

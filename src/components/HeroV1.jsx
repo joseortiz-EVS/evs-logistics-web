@@ -3,6 +3,7 @@ import { FaShip, FaPlane, FaTruck, FaGlobeAmericas } from 'react-icons/fa'
 import useIsMobile from '../hooks/useIsMobile'
 import { T } from '../tema'
 import { PORTAL } from '../acceso'
+import { PAIS } from '../paises'
 import { FaUserCircle } from 'react-icons/fa'
 
 const AnimatedText = ({ text, delay = 0, style }) => (
@@ -119,11 +120,11 @@ const HeroV1 = ({ onNavigate }) => {
       <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 1.6 }}
         style={{
           position: 'relative', zIndex: 3, display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-          gap: isMobile ? '20px' : '30px', padding: isMobile ? '20px' : '30px 40px', background: 'rgba(10,22,40,0.6)',
+          gap: isMobile ? '20px' : '30px', padding: isMobile ? '20px' : '30px 40px', background: 'rgba(255,255,255,0.85)',
           backdropFilter: 'blur(12px)', borderRadius: '16px', border: `1px solid ${T.borde}`,
           margin: '10px 24px 40px', maxWidth: isMobile ? '340px' : '700px', width: '90%'
         }}>
-        <Counter end={10} suffix="+" label="Años" icon={FaGlobeAmericas} delay={1.8} />
+        <Counter end={PAIS.cod === 'mx' ? 10 : PAIS.anios} suffix={PAIS.cod === 'mx' ? '+' : ''} label={PAIS.cod === 'mx' ? 'Años' : `Años en ${PAIS.corto}`} icon={FaGlobeAmericas} delay={1.8} />
         <Counter end={5} suffix="" label="Países" icon={FaShip} delay={2.0} />
         <Counter end={1000} suffix="+" label="Envíos" icon={FaTruck} delay={2.2} />
         <Counter end={50} suffix="+" label="Clientes" icon={FaPlane} delay={2.4} />
@@ -160,12 +161,12 @@ const HeroV1 = ({ onNavigate }) => {
             display: 'inline-flex', alignItems: 'center', gap: '11px',
             padding: '16px 40px', fontSize: 'clamp(15px, 1.8vw, 18px)', fontWeight: 700,
             letterSpacing: '2px', textTransform: 'uppercase',
-            color: '#fff', background: 'rgba(255,255,255,0.08)',
+            color: T.texto, background: T.superficie,
             border: `1.5px solid ${T.bordeFuerte}`, borderRadius: '12px',
             textDecoration: 'none', backdropFilter: 'blur(8px)', transition: 'all 0.3s'
           }}
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(99,179,237,0.2)'; e.currentTarget.style.borderColor = T.acento }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.borderColor = T.bordeFuerte }}
+          onMouseLeave={e => { e.currentTarget.style.background = T.superficie; e.currentTarget.style.borderColor = T.bordeFuerte }}
         >
           <FaUserCircle style={{ fontSize: '17px' }} /> {PORTAL.label}
         </motion.a>

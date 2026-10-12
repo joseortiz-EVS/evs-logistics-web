@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import logoWhite from '../assets/logo-white.png'
 import { T } from '../tema'
 import { PORTAL } from '../acceso'
+import { PAIS, PAISES, ORDEN, cambiarPais } from '../paises'
 
 const navLinks = [
   { label: 'Inicio', page: 'inicio' },
@@ -40,10 +41,26 @@ const NavbarV1 = ({ currentPage, onNavigate }) => {
           maxWidth: '1200px', margin: '0 auto', padding: '10px 24px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between'
         }}>
-          <button onClick={() => handleNav('inicio')}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-            <img src={logoWhite} alt="EVS Logistics" style={{ height: '40px', objectFit: 'contain' }} />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+            <button onClick={() => handleNav('inicio')}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+              <img src={logoWhite} alt="EVS Logistics" style={{ height: '40px', objectFit: 'contain' }} />
+            </button>
+            {/* Selector de país */}
+            <details className="sel-pais nav-desktop" style={{ position: 'relative', color: '#fff', fontSize: '13px', fontWeight: 600 }}>
+              <summary style={{ listStyle: 'none', cursor: 'pointer', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '999px', padding: '7px 14px', whiteSpace: 'nowrap' }}>
+                {PAIS.bandera} {PAIS.corto} <span style={{ fontSize: '10px' }}>▼</span>
+              </summary>
+              <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 16px 40px rgba(13,27,46,0.22)', padding: '8px', minWidth: '210px', display: 'flex', flexDirection: 'column' }}>
+                {ORDEN.map(k => (
+                  <button key={k} onClick={() => cambiarPais(k)} style={{
+                    textAlign: 'left', background: k === PAIS.cod ? '#EEF3F8' : 'none', border: 'none', cursor: 'pointer',
+                    color: '#0D1B2E', padding: '9px 12px', borderRadius: '8px', fontSize: '14px', fontWeight: k === PAIS.cod ? 800 : 500, fontFamily: 'inherit'
+                  }}>{PAISES[k].bandera} {PAISES[k].corto}</button>
+                ))}
+              </div>
+            </details>
+          </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }} className="nav-desktop">
             {navLinks.map(link => (

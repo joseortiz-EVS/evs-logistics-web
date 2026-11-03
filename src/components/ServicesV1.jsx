@@ -4,6 +4,8 @@ import { FaShip, FaPlane, FaFileContract, FaShoppingCart, FaTruck, FaBoxes, FaAr
 import ScrollReveal from './ScrollReveal'
 import { T } from '../tema'
 import useIsMobile from '../hooks/useIsMobile'
+import ForwardingMX from './ForwardingMX'
+import { PAIS } from '../paises'
 
 const services = [
   {
@@ -233,6 +235,8 @@ const ServicePage = ({ service, onBack, isMobile }) => (
           </div>
         ))}
       </div>
+
+      {service.slug === 'forwarding' && PAIS.cod === 'mx' && <ForwardingMX isMobile={isMobile} />}
     </div>
   </motion.div>
 )

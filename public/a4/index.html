@@ -44,10 +44,67 @@ summary{cursor:pointer;color:var(--blue)}
 .legend{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
 footer{color:var(--faint);font-size:13px;padding:28px 16px 40px}
 </style>
+
+<style>
+/* Puerta de contacto: se pide una vez, mismo buzón que el formulario de contacto */
+main.con-puerta > :not(#puerta){display:none}
+#puerta{display:none;margin:22px 0 40px}
+main.con-puerta #puerta{display:block}
+#puerta .intro h1{margin:0 0 8px}
+#puerta .intro p{margin:0 0 22px;color:var(--muted);font-size:16px;line-height:1.55;max-width:600px}
+#puerta .caja{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:start}
+#puerta .lado h2{margin:0 0 8px;font-size:20px;color:var(--text)}
+#puerta .lado p{margin:0 0 14px;font-size:14px;color:var(--muted);line-height:1.55}
+#puerta .lado ul{margin:0;padding:0;list-style:none}
+#puerta .lado li{position:relative;padding-left:24px;margin:0 0 10px;font-size:14px;color:var(--text);line-height:1.45}
+#puerta .lado li:before{content:"";position:absolute;left:0;top:5px;width:14px;height:14px;border-radius:50%;background:var(--ok-bg);border:1px solid var(--ok)}
+#puerta .lado li:after{content:"";position:absolute;left:5px;top:8px;width:4px;height:7px;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg)}
+#puerta label{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin:0 0 5px}
+#puerta .campo{margin:0 0 12px}
+#puerta input{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font-size:15px;color:var(--text);background:#fff;outline:none;box-sizing:border-box}
+#puerta input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(43,108,176,.15)}
+#puerta button{width:100%;height:46px;margin-top:4px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+#puerta button:disabled{opacity:.6;cursor:default}
+#puerta .nota{font-size:12px;color:var(--faint);margin:10px 0 0;text-align:center}
+#puerta .err{font-size:13px;color:var(--no);margin:0 0 8px;min-height:16px}
+@media (max-width:640px){#puerta .caja{grid-template-columns:1fr;gap:18px;padding:20px}}
+/* Mismo fondo que el sitio: fotografía del puerto con velo claro */
+body{background:var(--bg) url(/fotos/hero-port.jpg) center/cover fixed no-repeat;position:relative;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;background:rgba(238,243,248,.90);z-index:0;pointer-events:none}
+body>*{position:relative;z-index:1}
+.card,.empty,#puerta .caja{box-shadow:0 4px 24px rgba(13,27,46,.06)}
+</style>
 </head>
 <body>
 <header><div class="wrap hdr"><img src="data:image/png;base64,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" alt="EVS Logistics"><span>Buscador de importación por A4</span></div></header>
 <main class="wrap">
+<div id="puerta">
+  <div class="intro">
+    <h1>Clasificador</h1>
+    <p>Escribe el producto o la fracción arancelaria y te decimos qué necesita para entrar a México.</p>
+  </div>
+  <div class="caja">
+    <div class="lado">
+      <h2>Entra al clasificador</h2>
+      <p>Déjanos tus datos una sola vez. Después lo usas las veces que quieras, sin volver a registrarte.</p>
+      <ul>
+        <li>Busca por producto o por fracción arancelaria</li>
+        <li>Sabes qué pide la aduana antes de pagarle al proveedor</li>
+        <li>Si tienes dudas, un asesor de EVS te contacta</li>
+      </ul>
+    </div>
+    <form id="puerta-form" novalidate>
+      <div class="campo"><label for="p-nombre">Nombre</label><input id="p-nombre" name="nombre" autocomplete="name" required></div>
+      <div class="campo"><label for="p-wa">WhatsApp</label><input id="p-wa" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      <div class="campo"><label for="p-email">Correo</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="campo"><label for="p-importa">¿Qué importas o quieres importar?</label><input id="p-importa" name="importa" placeholder="Ej. luminarias LED, juguetes, refacciones"></div>
+      <div class="err" id="puerta-err"></div>
+      <button type="submit" id="puerta-btn">Entrar al clasificador</button>
+      <p class="nota">Al enviar aceptas que EVS Logistics te contacte sobre tu importación.</p>
+    </form>
+  </div>
+</div>
+
 <h1>Clasificador A4</h1>
 <p class="lead">Escribe el producto o la fracción arancelaria y te decimos si puede entrar a depósito fiscal sin NOM, COFEPRIS ni permisos.</p>
 <div class="search">
@@ -164,6 +221,25 @@ run();
     var data=JSON.parse(txt);
   }catch(e){locked('El link no es válido o ya cambió. Pídenos el link actualizado por WhatsApp.');return;}
   q.disabled=false;main(data);
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='evs_clasif_ok', main=document.querySelector('main');
+  try{ if(localStorage.getItem(KEY)) return; }catch(e){}
+  main.classList.add('con-puerta');
+  var f=document.getElementById('puerta-form'), b=document.getElementById('puerta-btn'), err=document.getElementById('puerta-err');
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nombre=f.nombre.value.trim(), wa=f.whatsapp.value.trim(), email=f.email.value.trim();
+    if(!nombre||!wa||!email||email.indexOf('@')<1){ err.textContent='Llena nombre, WhatsApp y correo para continuar.'; return; }
+    err.textContent=''; b.disabled=true; b.textContent='Enviando…';
+    var datos={nombre:nombre, whatsapp:wa, email:email, importa:f.importa.value.trim(), origen:'Clasificador (www.evslogist.com/a4/)', _subject:'Clasificador: '+nombre};
+    fetch('https://formspree.io/f/xkoloaaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(datos)})
+      .then(function(r){ if(!r.ok) throw 0; try{localStorage.setItem(KEY,'1')}catch(e){} main.classList.remove('con-puerta'); window.scrollTo(0,0); })
+      .catch(function(){ err.textContent='No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.'; b.disabled=false; b.textContent='Entrar al clasificador'; });
+  });
 })();
 </script>
 </body>

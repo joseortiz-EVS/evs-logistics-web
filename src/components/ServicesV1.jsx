@@ -7,6 +7,7 @@ import useIsMobile from '../hooks/useIsMobile'
 import ForwardingMX from './ForwardingMX'
 import GestionAduanalMX from './GestionAduanalMX'
 import AgenteComprasMX from './AgenteComprasMX'
+import RevisionOrigenMX from './RevisionOrigenMX'
 import { PAIS } from '../paises'
 
 const services = [
@@ -241,6 +242,7 @@ const ServicePage = ({ service, onBack, isMobile }) => (
       {service.slug === 'forwarding' && PAIS.cod === 'mx' && <ForwardingMX isMobile={isMobile} />}
       {service.slug === 'gestion-aduanal' && PAIS.cod === 'mx' && <GestionAduanalMX isMobile={isMobile} />}
       {service.slug === 'agente-de-compras' && PAIS.cod === 'mx' && <AgenteComprasMX isMobile={isMobile} />}
+      {service.slug === 'revision-en-origen' && PAIS.cod === 'mx' && <RevisionOrigenMX isMobile={isMobile} />}
     </div>
   </motion.div>
 )

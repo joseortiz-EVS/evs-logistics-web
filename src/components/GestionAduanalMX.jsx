@@ -1,7 +1,7 @@
 // Contenido ampliado de Gestión Aduanal para México (borrador para revisión de José).
 // Se muestra debajo de "Capacidades" solo en /servicios/gestion-aduanal/ con país México.
 // EVS es forwarder: la gestión aduanal se coordina con agentes aduanales con patente.
-import { FaSearch, FaClipboardCheck, FaIdCard, FaFileSignature, FaWarehouse, FaBoxOpen, FaCheckCircle, FaExclamationTriangle, FaArrowRight } from 'react-icons/fa'
+import { FaSearch, FaClipboardCheck, FaIdCard, FaFileSignature, FaBoxOpen, FaCheckCircle, FaExclamationTriangle, FaArrowRight } from 'react-icons/fa'
 import { T } from '../tema'
 
 const REVISION = [
@@ -16,8 +16,7 @@ const INCLUYE = [
   [FaClipboardCheck, 'Regulaciones no arancelarias', 'NOM, COFEPRIS, permisos previos, avisos y padrones sectoriales: identificamos cuáles aplican y cómo cumplirlos.'],
   [FaIdCard, 'Padrón de importadores', 'Si aún no estás dado de alta, te orientamos en el trámite ante el SAT y en los padrones sectoriales que necesites.'],
   [FaFileSignature, 'Pedimento y despacho', 'Coordinamos el despacho con agentes aduanales con patente en la aduana de llegada. Ellos elaboran y firman el pedimento; tú tratas con nosotros.'],
-  [FaBoxOpen, 'Previo en recinto', 'Revisión física de la mercancía antes del despacho para confirmar cantidades, etiquetado y que todo coincida con los documentos.'],
-  [FaWarehouse, 'Depósito fiscal', 'Introduce tu mercancía a un almacén general de depósito y extráela por partes, pagando conforme vendes.']
+  [FaBoxOpen, 'Previo en recinto', 'Revisión física de la mercancía antes del despacho para confirmar cantidades, etiquetado y que todo coincida con los documentos.']
 ]
 
 const DOCS = [
@@ -51,8 +50,7 @@ const FAQ = [
   ['¿Necesito un agente aduanal para importar de China?', 'Sí. En México la importación definitiva se hace a través de un agente aduanal con patente. Nosotros lo coordinamos por ti: tú tratas con un solo contacto y nosotros con el agente, el recinto y el transportista.'],
   ['¿Puedo importar sin padrón de importadores?', 'Para importar con fines comerciales necesitas estar inscrito en el padrón de importadores del SAT. Si aún no lo tienes, te decimos qué requisitos cumplir y te acompañamos en el trámite.'],
   ['¿Qué es la fracción arancelaria y por qué importa tanto?', 'Es el código con el que la aduana identifica tu producto. De ella dependen el arancel, los impuestos, las NOM y los permisos. Una fracción mal elegida es la fuente más frecuente de multas y retrasos.'],
-  ['¿Mi producto necesita NOM?', 'Depende del producto: electrónicos, juguetes, textiles, calzado y muchos otros sí la requieren. Lo revisamos antes de que compres y te decimos cómo cumplirla o si hay una alternativa como el depósito fiscal.'],
-  ['¿Qué es el depósito fiscal y cuándo me conviene?', 'Es un régimen que permite guardar tu mercancía en un almacén autorizado y extraerla por partes mediante pedimento, pagando los impuestos conforme la vas sacando. Conviene cuando importas volumen y vendes poco a poco, o cuando necesitas tiempo para cumplir una regulación.'],
+  ['¿Mi producto necesita NOM?', 'Depende del producto: electrónicos, juguetes, textiles, calzado y muchos otros sí la requieren. Lo revisamos antes de que compres y te decimos cómo cumplirla.'],
   ['¿En qué aduanas trabajan?', 'Principalmente Manzanillo, Lázaro Cárdenas, Veracruz, Altamira y el Aeropuerto de la Ciudad de México, que es por donde entra casi todo lo que llega de China.'],
   ['¿Cuánto tarda el despacho?', 'Con los documentos en orden, normalmente de 2 a 5 días hábiles desde que la mercancía está disponible en el recinto. Si toca reconocimiento aduanero puede extenderse algunos días más.'],
   ['¿Qué pasa si me toca reconocimiento aduanero?', 'La autoridad revisa físicamente la mercancía contra el pedimento. Si la clasificación, el valor y los documentos están bien hechos, es solo tiempo. Por eso insistimos en la revisión previa.']
@@ -128,20 +126,14 @@ const GestionAduanalMX = ({ isMobile }) => (
       </div>
     </section>
 
-    {/* Depósito fiscal */}
+    {/* Clasificador */}
     <section>
       <Tarjeta style={{ background: T.superficieAlta, padding: isMobile ? '24px 20px' : '36px' }}>
-        <Etiqueta>Depósito fiscal</Etiqueta>
-        <Titulo h="h3">Importa por partes y paga conforme vendes</Titulo>
-        <Parrafo style={{ maxWidth: 'none' }}>
-          El depósito fiscal permite introducir tu mercancía a un almacén general de depósito autorizado y extraerla por partes mediante
-          pedimento, pagando los impuestos de cada extracción en lugar de todo al llegar. Además, hay productos que pueden entrar a
-          depósito fiscal sin presentar NOM, COFEPRIS ni permisos en ese momento, lo que te da tiempo para cumplirlos antes de la
-          importación definitiva.
-        </Parrafo>
+        <Etiqueta>Herramienta</Etiqueta>
+        <Titulo h="h3">Revisa tu producto con nuestro Clasificador</Titulo>
         <Parrafo style={{ maxWidth: 'none', margin: 0 }}>
-          Con nuestro <a href="/a4/" style={{ color: T.acento, fontWeight: 700, textDecoration: 'underline' }}>Clasificador</a>, exclusivo para clientes, escribes el producto o la fracción
-          y te decimos al momento si puede entrar a depósito fiscal y bajo qué condiciones.
+          Escribe el producto o la fracción arancelaria en nuestro <a href="/a4/" style={{ color: T.acento, fontWeight: 700, textDecoration: 'underline' }}>Clasificador</a> y
+          te decimos qué necesita para entrar a México. Si tienes dudas, un asesor de EVS te contacta.
         </Parrafo>
       </Tarjeta>
     </section>

@@ -8,6 +8,7 @@ import ForwardingMX from './ForwardingMX'
 import GestionAduanalMX from './GestionAduanalMX'
 import AgenteComprasMX from './AgenteComprasMX'
 import RevisionOrigenMX from './RevisionOrigenMX'
+import TransporteTerrestreMX from './TransporteTerrestreMX'
 import { PAIS } from '../paises'
 
 const services = [
@@ -243,6 +244,7 @@ const ServicePage = ({ service, onBack, isMobile }) => (
       {service.slug === 'gestion-aduanal' && PAIS.cod === 'mx' && <GestionAduanalMX isMobile={isMobile} />}
       {service.slug === 'agente-de-compras' && PAIS.cod === 'mx' && <AgenteComprasMX isMobile={isMobile} />}
       {service.slug === 'revision-en-origen' && PAIS.cod === 'mx' && <RevisionOrigenMX isMobile={isMobile} />}
+      {service.slug === 'transporte-terrestre' && PAIS.cod === 'mx' && <TransporteTerrestreMX isMobile={isMobile} />}
     </div>
   </motion.div>
 )

@@ -24,7 +24,7 @@ const PASOS = [
   ['Entrega en tu bodega', 'Transporte desde el puerto o aeropuerto hasta tu dirección, en cualquier parte de México.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Puedo importar aunque sea mi primera vez?', 'Sí. Te explicamos cómo funciona el embarque antes de que compres y te acompañamos en todo el proceso. La mayoría de nuestros clientes empezó con un envío consolidado pequeño.'],
   ['¿Qué tan chico puede ser mi envío?', 'Desde 1 m³ en consolidado marítimo (LCL) y desde unos kilos en aéreo. Pagas solo por el espacio que ocupa tu mercancía.'],
   ['¿Mi carga va asegurada?', 'Te ofrecemos seguro de carga por el valor de tu mercancía. Te recomendamos contratarlo siempre; es un porcentaje mínimo del valor del embarque.'],

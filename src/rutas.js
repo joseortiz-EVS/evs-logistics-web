@@ -5,7 +5,7 @@
 
 export const PAISES_RUTA = ['co', 'do', 'ec']
 export const SERVICIOS_SLUG = ['forwarding', 'gestion-aduanal', 'agente-de-compras', 'revision-en-origen', 'transporte-terrestre', '3pl']
-const PANTALLAS = { '': 'inicio', nosotros: 'nosotros', servicios: 'servicios', galeria: 'galeria', contacto: 'contacto' }
+const PANTALLAS = { '': 'inicio', nosotros: 'nosotros', servicios: 'servicios', galeria: 'galeria', contacto: 'contacto', blog: 'blog', curso: 'curso' }
 
 export const prefijo = (pais) => PAISES_RUTA.includes(pais) ? `/${pais}` : ''
 

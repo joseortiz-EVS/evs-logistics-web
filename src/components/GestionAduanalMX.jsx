@@ -46,7 +46,7 @@ const ERRORES = [
   ['Documentos que no coinciden', 'Factura, lista de empaque y BL con cantidades o descripciones distintas detienen el despacho.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Necesito un agente aduanal para importar de China?', 'Sí. En México la importación definitiva se hace a través de un agente aduanal con patente. Nosotros lo coordinamos por ti: tú tratas con un solo contacto y nosotros con el agente, el recinto y el transportista.'],
   ['¿Puedo importar sin padrón de importadores?', 'Para importar con fines comerciales necesitas estar inscrito en el padrón de importadores del SAT. Si aún no lo tienes, te decimos qué requisitos cumplir y te acompañamos en el trámite.'],
   ['¿Qué es la fracción arancelaria y por qué importa tanto?', 'Es el código con el que la aduana identifica tu producto. De ella dependen el arancel, los impuestos, las NOM y los permisos. Una fracción mal elegida es la fuente más frecuente de multas y retrasos.'],

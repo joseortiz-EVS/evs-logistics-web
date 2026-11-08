@@ -39,7 +39,7 @@ const PASOS = [
   ['Si hay problemas, los resolvemos con la fábrica', 'Retrabajo, reposición, descuento o retener el saldo hasta que quede bien. Negociamos nosotros, en chino.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Cuándo conviene hacer una revisión en origen?', 'Siempre que no puedas darte el lujo de recibir mal el pedido: primera compra a un proveedor nuevo, pedidos grandes, productos con medidas o funcionamiento críticos, o marca propia. La revisión cuesta una fracción de lo que cuesta un contenedor con defectos.'],
   ['¿Cuántas piezas revisan?', 'Una muestra aleatoria calculada con la norma internacional de muestreo (ISO 2859-1, el sistema AQL). Antes de ir acordamos contigo el nivel: qué tanto defecto es aceptable para tu producto y qué no.'],
   ['¿Cuánto tarda?', 'La visita se programa normalmente en 2 a 3 días hábiles y el reporte lo tienes 48 horas después de la revisión. Si la mercancía está en nuestra bodega, es más rápido.'],

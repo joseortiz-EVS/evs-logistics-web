@@ -43,7 +43,7 @@ const PASOS = [
   ['Preparamos y entregamos', 'Surtimos, etiquetamos, paletizamos y entregamos: a tu cliente, a la cadena, al marketplace o a la paquetería.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Necesito un volumen mínimo?', 'No. Trabajamos desde unas cuantas tarimas hasta contenedores completos. La cotización se ajusta al espacio que ocupas y a los movimientos que haces.'],
   ['¿Cómo cobran el servicio?', 'Por espacio ocupado y por movimiento: recepción, almacenaje, preparación y entrega. Con tu volumen aproximado te damos una cotización clara, sin cargos escondidos.'],
   ['¿Pueden mandar mi inventario a Amazon o Mercado Libre?', 'Sí. Preparamos los envíos conforme a los requisitos de cada uno, con su etiquetado y su cita, y los entregamos en sus centros de distribución.'],

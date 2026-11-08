@@ -57,7 +57,7 @@ const PASOS = [
   ['Entregamos y cerramos', 'Descarga programada, evidencia de entrega y, si fue contenedor, regreso del vacío a la terminal.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Solo mueven lo que importan con ustedes?', 'No. La mayoría de nuestros fletes son nacionales: carga entre ciudades, distribución a clientes, maquinaria, tarimas consolidadas. También movemos un contenedor que ya tienes en puerto con otro forwarder.'],
   ['¿Qué pasa con los días libres del contenedor en puerto?', 'Programamos el retiro dentro de los días libres de la naviera y la terminal para que no pagues demoras ni almacenaje. Si el despacho se atrasa, te avisamos antes de que venza el plazo.'],
   ['¿Cuánto tarda de Manzanillo a la Ciudad de México?', 'Normalmente entre 1 y 2 días desde que el contenedor sale de la terminal. Al Bajío y Guadalajara, un día. A Monterrey, dos.'],

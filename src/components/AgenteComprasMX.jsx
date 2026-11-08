@@ -45,7 +45,7 @@ const PASOS = [
   ['Consolidación y envío a México', 'Recibimos en nuestra bodega, consolidamos y embarcamos. El flete y la aduana los coordinamos nosotros mismos.']
 ]
 
-const FAQ = [
+export const FAQ = [
   ['¿Qué diferencia hay entre comprar directo en Alibaba y comprar con ustedes?', 'En Alibaba tratas tú solo con un proveedor que no conoces, en otro idioma y a 14 mil kilómetros. Con nosotros tienes un equipo en China que verifica la fábrica, negocia, revisa la mercancía antes de que salga y la trae hasta tu bodega. Tú tratas con un solo contacto en México.'],
   ['¿Me dicen quién es la fábrica?', 'Sí. Trabajamos con transparencia: conoces el nombre y los datos del proveedor, y los pagos van directo a esa empresa.'],
   ['¿Cómo se paga al proveedor?', 'Por hitos: normalmente un anticipo para arrancar producción y el resto contra inspección aprobada, antes del embarque. Siempre a la razón social verificada de la fábrica.'],

@@ -7,6 +7,8 @@ import PhotoCarousel from './components/PhotoCarousel'
 import Contact from './components/Contact'
 import FooterV1 from './components/FooterV1'
 import Marquee from './components/Marquee'
+import Blog from './components/Blog'
+import Curso from './components/Curso'
 import { T } from './tema'
 import { PAIS, LLEGO_POR_UBICACION } from './paises'
 import { leerRuta, rutaDe } from './rutas'
@@ -17,10 +19,12 @@ const pages = {
   nosotros: About,
   servicios: ServicesV1,
   galeria: PhotoCarousel,
-  contacto: Contact
+  contacto: Contact,
+  blog: Blog,
+  curso: Curso
 }
 
-const pagesWithMarquee = ['inicio', 'nosotros', 'servicios', 'galeria', 'contacto']
+const pagesWithMarquee = ['inicio', 'nosotros', 'servicios', 'galeria', 'contacto', 'blog', 'curso']
 
 const App = () => {
   const inicial = leerRuta(window.location.pathname)

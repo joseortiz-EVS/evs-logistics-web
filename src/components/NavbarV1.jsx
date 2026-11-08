@@ -10,7 +10,9 @@ const navLinks = [
   { label: 'Inicio', page: 'inicio' },
   { label: 'Nosotros', page: 'nosotros' },
   { label: 'Servicios', page: 'servicios' },
-  { label: 'Galería', page: 'galeria' }
+  { label: 'Galería', page: 'galeria' },
+  { label: 'Blog', page: 'blog' },
+  { label: 'Curso', page: 'curso' }
 ]
 
 const CTA = { label: 'Solicitar Cotización', page: 'contacto' }

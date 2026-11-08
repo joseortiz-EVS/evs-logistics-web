@@ -30,25 +30,27 @@ const App = () => {
   const inicial = leerRuta(window.location.pathname)
   const [currentPage, setCurrentPage] = useState(inicial.page || 'inicio')
   const [servicio, setServicio] = useState(inicial.servicio)
+  const [articulo, setArticulo] = useState(inicial.articulo)
   const [aviso, setAviso] = useState(LLEGO_POR_UBICACION)
 
   // Misma navegación por pantallas; la dirección solo refleja dónde estás
-  const ir = (page, serv = null, empujar = true) => {
+  const ir = (page, serv = null, empujar = true, art = null) => {
     setCurrentPage(page)
     setServicio(serv)
-    if (empujar) window.history.pushState(null, '', rutaDe(PAIS.cod, page, serv))
+    setArticulo(art)
+    if (empujar) window.history.pushState(null, '', rutaDe(PAIS.cod, page, serv, art))
     window.scrollTo(0, 0)
   }
   const handleNavigate = (page) => ir(page)
 
   useEffect(() => {
-    const alVolver = () => { const r = leerRuta(window.location.pathname); ir(r.page || 'inicio', r.servicio, false) }
+    const alVolver = () => { const r = leerRuta(window.location.pathname); ir(r.page || 'inicio', r.servicio, false, r.articulo) }
     window.addEventListener('popstate', alVolver)
     return () => window.removeEventListener('popstate', alVolver)
   }, [])
 
   // Título, descripción y etiquetas para Google de la pantalla actual
-  useEffect(() => { aplicarMeta(PAIS.cod, currentPage, servicio) }, [currentPage, servicio])
+  useEffect(() => { aplicarMeta(PAIS.cod, currentPage, servicio, articulo) }, [currentPage, servicio, articulo])
 
   const PageComponent = pages[currentPage]
 
@@ -77,7 +79,7 @@ const App = () => {
             &nbsp;·&nbsp; <a href="#" onClick={e => { e.preventDefault(); setAviso(false) }} style={{ opacity: .7, color: 'inherit' }}>Cerrar</a>
           </div>
         )}
-        <PageComponent onNavigate={handleNavigate} servicio={servicio} onServicio={(slug) => ir('servicios', slug)} />
+        <PageComponent onNavigate={handleNavigate} servicio={servicio} onServicio={(slug) => ir('servicios', slug)} articulo={articulo} />
         {pagesWithMarquee.includes(currentPage) && <Marquee />}
         <FooterV1 onNavigate={handleNavigate} />
       </div>

@@ -30,7 +30,8 @@ if (!esSitio) {
   // Atajo ?pais=co: ir a la dirección de ese país, misma pantalla
   try { localStorage.setItem('evs_pais', forzado) } catch {}
   window.location.replace(rutaDe(forzado, ruta.page, ruta.servicio) + (LLEGO_POR_UBICACION ? '?auto=1' : ''))
-} else if (cod === 'mx' && guardado && guardado !== 'mx' && PAISES[guardado] && !forzado && !esBot) {
+} else if (cod === 'mx' && guardado && guardado !== 'mx' && PAISES[guardado] && !forzado && !esBot && !ruta.articulo) {
+  // (los artículos del blog solo existen en la raíz: ahí no se redirige)
   // Quien ya eligió país y entra por la raíz, va a su país (salvo que pida México con ?pais=mx)
   window.location.replace(rutaDe(guardado, ruta.page, ruta.servicio))
 } else {

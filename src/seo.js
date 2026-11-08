@@ -8,6 +8,7 @@ import { FAQ as FAQ_COMPRAS } from './components/AgenteComprasMX'
 import { FAQ as FAQ_REVISION } from './components/RevisionOrigenMX'
 import { FAQ as FAQ_TERRESTRE } from './components/TransporteTerrestreMX'
 import { FAQ as FAQ_3PL } from './components/TresPLMX'
+import { articuloPorSlug } from './blog/indice'
 
 export const DOMINIO = 'https://www.evslogist.com'
 const IDIOMA = { mx: 'es-MX', co: 'es-CO', do: 'es-DO', ec: 'es-EC' }
@@ -22,8 +23,13 @@ const SERVICIOS = {
   '3pl':                  p => ({ title: `3PL: almacenaje y distribución en ${p.nombre}${MARCA}`, desc: `Almacenamiento, gestión de inventarios, preparación de pedidos, cross-docking y última milla en ${p.nombre}.` }),
 }
 
-export function metaDe(pais, page, servicio) {
+export function metaDe(pais, page, servicio, articulo) {
   const p = PAISES[pais]
+  if (page === 'blog' && articulo) {
+    const a = articuloPorSlug(articulo)
+    if (a) return { title: `${a.titulo}${MARCA}`, desc: a.descripcion }
+    return { title: `Artículo no encontrado${MARCA}`, desc: 'Este artículo no existe o cambió de dirección.' }
+  }
   switch (page) {
     case 'nosotros': return { title: `Presencia global: México, China, Colombia, Rep. Dominicana y Ecuador${MARCA}`, desc: `Operamos en 5 países conectando Latinoamérica con Asia. En ${p.nombre} desde ${p.desde}.` }
     case 'servicios':
@@ -79,9 +85,9 @@ function datosEstructurados(pais, page, servicio, title, desc, url) {
   return { '@context': 'https://schema.org', '@graph': grafo }
 }
 
-export function aplicarMeta(pais, page, servicio) {
-  const { title, desc } = metaDe(pais, page, servicio)
-  const url = DOMINIO + rutaDe(pais, page, servicio)
+export function aplicarMeta(pais, page, servicio, articulo = null) {
+  const { title, desc } = metaDe(pais, page, servicio, articulo)
+  const url = DOMINIO + rutaDe(pais, page, servicio, articulo)
   document.title = title
   document.documentElement.lang = IDIOMA[pais] || 'es'
   meta('name', 'description', desc)
@@ -89,10 +95,29 @@ export function aplicarMeta(pais, page, servicio) {
   meta('property', 'og:url', url); meta('property', 'og:type', 'website'); meta('property', 'og:image', DOMINIO + '/fotos/hero-port.jpg')
   etiqueta('link[rel="canonical"]', () => { const l = document.createElement('link'); l.rel = 'canonical'; return l }).href = url
   document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach(l => l.remove())
-  for (const k of ORDEN) {
+  const paisesConVersion = articulo ? ['mx'] : ORDEN   // los artículos solo existen en México
+  for (const k of paisesConVersion) {
     const l = document.createElement('link'); l.rel = 'alternate'; l.hreflang = IDIOMA[k]; l.href = DOMINIO + rutaDe(k, page, servicio); document.head.appendChild(l)
   }
-  const xd = document.createElement('link'); xd.rel = 'alternate'; xd.hreflang = 'x-default'; xd.href = DOMINIO + rutaDe('mx', page, servicio); document.head.appendChild(xd)
+  const xd = document.createElement('link'); xd.rel = 'alternate'; xd.hreflang = 'x-default'; xd.href = DOMINIO + rutaDe('mx', page, servicio, articulo); document.head.appendChild(xd)
   const ld = etiqueta('script[type="application/ld+json"]', () => { const sc = document.createElement('script'); sc.type = 'application/ld+json'; return sc })
   ld.textContent = JSON.stringify(datosEstructurados(pais, page, servicio, title, desc, url))
+  if (page === 'blog') meta('property', 'og:type', articulo ? 'article' : 'website')
+}
+
+// Datos estructurados de un artículo, cuando ya se cargó su contenido (incluye sus preguntas frecuentes).
+export function aplicarDatosArticulo(meta, art) {
+  const url = DOMINIO + rutaDe('mx', 'blog', null, meta.slug)
+  const grafo = [ORGANIZACION,
+    { '@type': 'WebSite', '@id': DOMINIO + '/#sitio', url: DOMINIO + '/', name: 'EVS Logistics', publisher: { '@id': DOMINIO + '/#organizacion' }, inLanguage: 'es' },
+    { '@type': 'Article', '@id': url + '#articulo', headline: meta.titulo, description: meta.descripcion, datePublished: meta.fecha, dateModified: meta.fecha, inLanguage: 'es-MX', mainEntityOfPage: url, author: { '@id': DOMINIO + '/#organizacion' }, publisher: { '@id': DOMINIO + '/#organizacion' }, image: DOMINIO + '/fotos/hero-port.jpg' },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: DOMINIO + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: DOMINIO + '/blog/' },
+      { '@type': 'ListItem', position: 3, name: meta.titulo, item: url }
+    ] }
+  ]
+  if (art.faq?.length) grafo.push({ '@type': 'FAQPage', '@id': url + '#faq', mainEntity: art.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') } })) })
+  const ld = document.head.querySelector('script[type="application/ld+json"]')
+  if (ld) ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': grafo })
 }

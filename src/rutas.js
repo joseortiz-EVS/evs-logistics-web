@@ -16,12 +16,14 @@ export function leerRuta(pathname) {
   if (PAISES_RUTA.includes(partes[0])) pais = partes.shift()
   const page = PANTALLAS[partes[0] || ''] ?? null
   const servicio = page === 'servicios' && SERVICIOS_SLUG.includes(partes[1]) ? partes[1] : null
-  return { pais, page, servicio }
+  const articulo = page === 'blog' && partes[1] ? partes[1] : null
+  return { pais, page, servicio, articulo }
 }
 
-export function rutaDe(pais, page = 'inicio', servicio = null) {
+export function rutaDe(pais, page = 'inicio', servicio = null, articulo = null) {
   const base = prefijo(pais)
   if (!page || page === 'inicio') return base + '/'
   if (page === 'servicios' && servicio) return `${base}/servicios/${servicio}/`
+  if (page === 'blog' && articulo) return `/blog/${articulo}/`   // los artículos viven solo en la raíz (México)
   return `${base}/${page}/`
 }

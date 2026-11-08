@@ -21,7 +21,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 const PAISES = ['mx', 'co', 'do', 'ec']
 const SERVICIOS = ['forwarding', 'gestion-aduanal', 'agente-de-compras', 'revision-en-origen', 'transporte-terrestre', '3pl']
 const pre = p => p === 'mx' ? '' : `/${p}`
-const RUTAS = PAISES.flatMap(p => [`${pre(p)}/`, `${pre(p)}/nosotros/`, `${pre(p)}/servicios/`, ...SERVICIOS.map(s => `${pre(p)}/servicios/${s}/`), `${pre(p)}/galeria/`, `${pre(p)}/contacto/`, `${pre(p)}/blog/`, `${pre(p)}/curso/`])
+import { SLUGS as ARTICULOS } from '../src/blog/indice.js'
+const RUTAS = [...ARTICULOS.map(a => `/blog/${a}/`), ...PAISES.flatMap(p => [`${pre(p)}/`, `${pre(p)}/nosotros/`, `${pre(p)}/servicios/`, ...SERVICIOS.map(s => `${pre(p)}/servicios/${s}/`), `${pre(p)}/galeria/`, `${pre(p)}/contacto/`, `${pre(p)}/blog/`, `${pre(p)}/curso/`])]
 
 console.log('→ vite build')
 const b = spawnSync(join(RAIZ, 'node_modules/.bin/vite'), ['build'], { cwd: RAIZ, stdio: 'inherit' })

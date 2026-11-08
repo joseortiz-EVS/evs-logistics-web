@@ -8,7 +8,7 @@ import Portal from './portal/Portal'
 import { PAISES_RUTA } from './rutas'
 
 // Sitio público: una ruta por pantalla y por país (/, /nosotros, /servicios/forwarding, /co/..., /do/..., /ec/...)
-const PANTALLAS = ['', 'nosotros', 'servicios', 'servicios/:servicio', 'galeria', 'contacto', 'blog', 'curso']
+const PANTALLAS = ['', 'nosotros', 'servicios', 'servicios/:servicio', 'galeria', 'contacto', 'blog', 'blog/:articulo', 'curso']
 const RUTAS_SITIO = ['', ...PAISES_RUTA.map(p => '/' + p)].flatMap(pre => PANTALLAS.map(pan => `${pre}/${pan}`.replace(/\/+$/, '') || '/'))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
